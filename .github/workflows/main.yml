@@ -1,0 +1,34 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./path/to/Dockerfile
+        push: true
+        tags: be-ikram
+
+    - name: SSH into instance and deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.INSTANCE_IP }}
+        username: ${{ secrets.INSTANCE_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          docker stop be-ikram || true
+          docker rm be-ikram || true
+          docker pull be-ikram
+          docker run -d --name be-ikram -p 3000:3000 be-ikram
