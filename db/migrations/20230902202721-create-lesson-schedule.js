@@ -2,41 +2,48 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Departments', {
+    await queryInterface.createTable('LessonSchedules', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.INTEGER,
       },
       idUnit: {
-        allowNull: false,
         type: Sequelize.UUID,
       },
-      code: {
-        allowNull: false,
+      idAcademicYear: {
+        type: Sequelize.UUID,
+      },
+      idClassroom: {
+        type: Sequelize.UUID,
+      },
+      idLesson: {
+        type: Sequelize.UUID,
+      },
+      idRoom: {
+        type: Sequelize.UUID,
+      },
+      idEmployee: {
+        type: Sequelize.UUID,
+      },
+      parallelSchedule: {
         type: Sequelize.STRING,
       },
-      name: {
-        allowNull: false,
+      serialSchedule: {
         type: Sequelize.STRING,
       },
-      expertise: {
-        type: Sequelize.STRING,
+      startTime: {
+        type: Sequelize.TIME,
       },
-      generalCompetence: {
-        type: Sequelize.STRING,
+      endTime: {
+        type: Sequelize.TIME,
       },
-      specialCompetence: {
-        type: Sequelize.STRING,
-      },
-      description: {
+      day: {
         type: Sequelize.STRING,
       },
       active: {
-        allowNull: false,
         type: Sequelize.BOOLEAN,
-        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +56,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Departments')
+    await queryInterface.dropTable('LessonSchedules')
   },
 }

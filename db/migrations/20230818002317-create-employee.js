@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
+      idUnit: {
+        type: Sequelize.UUID,
+      },
       nip: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -79,6 +82,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
       marriageStatus: {
+        type: Sequelize.STRING,
+      },
+      photo: {
         type: Sequelize.STRING,
       },
       nik: {
