@@ -95,6 +95,8 @@ class AuthController {
     })
   }
 
+  async profile(req, res) {}
+
   async logout(req, res) {}
 }
 

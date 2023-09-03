@@ -20,7 +20,7 @@ class EmployeeController {
         data = await Employee.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
+          order: [['createdAt', 'ASC']],
         })
       } else {
         data = await Employee.findByPk(id)

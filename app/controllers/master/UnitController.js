@@ -20,7 +20,6 @@ class UnitController {
         data = await Unit.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
         })
       } else {
         data = await Unit.findByPk(id)

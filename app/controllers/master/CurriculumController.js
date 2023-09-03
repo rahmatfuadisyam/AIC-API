@@ -20,7 +20,7 @@ class CurriculumController {
         data = await Curriculum.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
+          order: [['name', 'ASC']],
         })
       } else {
         data = await Curriculum.findByPk(id)

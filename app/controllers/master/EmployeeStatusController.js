@@ -20,7 +20,6 @@ class EmployeeStatusController {
         data = await EmployeeStatus.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
         })
       } else {
         data = await EmployeeStatus.findByPk(id)

@@ -20,7 +20,6 @@ class ClassController {
         data = await Class.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
         })
       } else {
         data = await Class.findByPk(id)
