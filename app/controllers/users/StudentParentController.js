@@ -20,7 +20,6 @@ class StudentParentController {
         data = await StudentParent.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
         })
       } else {
         data = await StudentParent.findByPk(id)

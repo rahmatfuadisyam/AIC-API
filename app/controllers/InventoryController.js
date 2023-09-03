@@ -20,7 +20,7 @@ class InventoryController {
         inventory = await Inventory.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
+          order: [['createdAt', 'ASC']],
         })
       } else {
         inventory = await Inventory.findByPk(id)

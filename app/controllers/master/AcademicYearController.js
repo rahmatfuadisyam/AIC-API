@@ -20,7 +20,6 @@ class AcademicYearController {
         data = await AcademicYear.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
         })
       } else {
         data = await AcademicYear.findByPk(id)

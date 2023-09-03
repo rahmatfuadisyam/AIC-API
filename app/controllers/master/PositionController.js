@@ -20,7 +20,6 @@ class PositionController {
         data = await Position.findAndCountAll({
           offset: offset,
           limit: limit,
-          order: [['code', 'ASC']],
         })
       } else {
         data = await Position.findByPk(id)
