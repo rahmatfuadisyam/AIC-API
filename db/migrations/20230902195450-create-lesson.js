@@ -2,41 +2,54 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Departments', {
+    await queryInterface.createTable('Lessons', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.INTEGER,
       },
       idUnit: {
-        allowNull: false,
+        type: Sequelize.UUID,
+      },
+      idCurriculum: {
+        type: Sequelize.UUID,
+      },
+      idDepartment: {
+        type: Sequelize.UUID,
+      },
+      idEmployee: {
+        type: Sequelize.UUID,
+      },
+      idLessonGroup: {
         type: Sequelize.UUID,
       },
       code: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
-      expertise: {
+      level: {
         type: Sequelize.STRING,
       },
-      generalCompetence: {
+      basicCompetence: {
         type: Sequelize.STRING,
       },
       specialCompetence: {
         type: Sequelize.STRING,
       },
-      description: {
+      hours: {
+        type: Sequelize.INTEGER,
+      },
+      index: {
+        type: Sequelize.INTEGER,
+      },
+      session: {
         type: Sequelize.STRING,
       },
       active: {
-        allowNull: false,
         type: Sequelize.BOOLEAN,
-        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +62,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Departments')
+    await queryInterface.dropTable('Lessons')
   },
 }

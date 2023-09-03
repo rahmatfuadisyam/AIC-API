@@ -2,39 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Classrooms', {
+    await queryInterface.createTable('LessonGroups', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.INTEGER,
       },
       idUnit: {
-        allowNull: false,
         type: Sequelize.UUID,
       },
-      code: {
-        allowNull: false,
+      type: {
         type: Sequelize.STRING,
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING,
-      },
-      idTeacher: {
-        type: Sequelize.UUID,
-      },
-      idDepartment: {
-        type: Sequelize.UUID,
-      },
-      idBuilding: {
-        type: Sequelize.UUID,
-      },
-      idRoom: {
-        type: Sequelize.UUID,
-      },
-      quantity: {
-        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +29,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Classrooms')
+    await queryInterface.dropTable('LessonGroups')
   },
 }

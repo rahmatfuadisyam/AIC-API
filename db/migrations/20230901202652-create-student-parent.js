@@ -2,58 +2,70 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Inventories', {
+    await queryInterface.createTable('StudentParents', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      idUnit: {
+      idStudent: {
         allowNull: false,
         type: Sequelize.UUID,
       },
-      code: {
-        allowNull: false,
+      fatherName: {
         type: Sequelize.STRING,
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      description: {
-        type: Sequelize.STRING,
-      },
-      condition: {
-        type: Sequelize.STRING,
-      },
-      quantity: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      source: {
-        type: Sequelize.STRING,
-      },
-      receiptDate: {
-        type: Sequelize.DATEONLY,
-      },
-      responsiblePerson: {
-        type: Sequelize.STRING,
-      },
-      image: {
-        type: Sequelize.STRING,
-      },
-      capacity: {
+      fatherBirthYear: {
         type: Sequelize.INTEGER,
       },
-      length: {
+      fatherLastEducation: {
+        type: Sequelize.STRING,
+      },
+      fatherOccupation: {
+        type: Sequelize.STRING,
+      },
+      fatherIncome: {
+        type: Sequelize.STRING,
+      },
+      fatherPhone: {
+        type: Sequelize.STRING,
+      },
+      motherName: {
+        type: Sequelize.STRING,
+      },
+      motherBirthYear: {
         type: Sequelize.INTEGER,
       },
-      height: {
+      mothnerLastEducation: {
+        type: Sequelize.STRING,
+      },
+      motherOccupation: {
+        type: Sequelize.STRING,
+      },
+      motherIncome: {
+        type: Sequelize.STRING,
+      },
+      motherPhone: {
+        type: Sequelize.STRING,
+      },
+      guardName: {
+        type: Sequelize.STRING,
+      },
+      guardBirthYear: {
         type: Sequelize.INTEGER,
       },
-      width: {
-        type: Sequelize.INTEGER,
+      guardLastEducation: {
+        type: Sequelize.STRING,
+      },
+      guardOccupation: {
+        type: Sequelize.STRING,
+      },
+      guardIncome: {
+        type: Sequelize.STRING,
+      },
+      guardPhone: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -64,13 +76,8 @@ module.exports = {
         type: Sequelize.DATE,
       },
     })
-    await queryInterface.addIndex('Inventories', ['code'], {
-      unique: true,
-      name: 'unique_index_code',
-    })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Inventories')
-    await queryInterface.removeIndex('Inventories', 'unique_index_code')
+    await queryInterface.dropTable('StudentParents')
   },
 }

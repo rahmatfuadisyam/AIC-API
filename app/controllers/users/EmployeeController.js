@@ -1,10 +1,10 @@
-const { Student } = require('@models')
+const { Employee } = require('@models')
 const { paginationService } = require('@services/helper.service')
 
-class StudentController {
+class EmployeeController {
   async create(req, res) {
     try {
-      const data = await Student.create(req.body)
+      const data = await Employee.create(req.body)
       res.status(201).json(data)
     } catch (error) {
       res.status(500).json({ error: error.message })
@@ -17,16 +17,16 @@ class StudentController {
       let data = null
       if (id === undefined) {
         const { offset, limit } = paginationService(req.query)
-        data = await Student.findAndCountAll({
+        data = await Employee.findAndCountAll({
           offset: offset,
           limit: limit,
           order: [['code', 'ASC']],
         })
       } else {
-        data = await Student.findByPk(id)
+        data = await Employee.findByPk(id)
       }
       if (!data) {
-        res.status(404).json({ message: 'Student not found' })
+        res.status(404).json({ message: 'Employee not found' })
       } else {
         res.status(200).json(data)
       }
@@ -38,12 +38,12 @@ class StudentController {
   async update(req, res) {
     const { id } = req.params
     try {
-      const [updatedRowsCount, updatedRows] = await Student.update(req.body, {
+      const [updatedRowsCount, updatedRows] = await Employee.update(req.body, {
         where: { id },
         returning: true,
       })
       if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'Student not found' })
+        res.status(404).json({ message: 'Employee not found' })
       } else {
         res.status(200).json(updatedRows[0])
       }
@@ -55,9 +55,9 @@ class StudentController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const deletedRowCount = await Student.destroy({ where: { id } })
+      const deletedRowCount = await Employee.destroy({ where: { id } })
       if (deletedRowCount === 0) {
-        res.status(404).json({ message: 'Student not found' })
+        res.status(404).json({ message: 'Employee not found' })
       } else {
         res.status(204).end()
       }
@@ -67,5 +67,5 @@ class StudentController {
   }
 }
 
-const studentController = new StudentController()
-module.exports = studentController
+const employeeController = new EmployeeController()
+module.exports = employeeController

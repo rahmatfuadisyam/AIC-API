@@ -1,10 +1,10 @@
-const { Student } = require('@models')
+const { StudentParent } = require('@models')
 const { paginationService } = require('@services/helper.service')
 
-class StudentController {
+class StudentParentController {
   async create(req, res) {
     try {
-      const data = await Student.create(req.body)
+      const data = await StudentParent.create(req.body)
       res.status(201).json(data)
     } catch (error) {
       res.status(500).json({ error: error.message })
@@ -17,16 +17,16 @@ class StudentController {
       let data = null
       if (id === undefined) {
         const { offset, limit } = paginationService(req.query)
-        data = await Student.findAndCountAll({
+        data = await StudentParent.findAndCountAll({
           offset: offset,
           limit: limit,
           order: [['code', 'ASC']],
         })
       } else {
-        data = await Student.findByPk(id)
+        data = await StudentParent.findByPk(id)
       }
       if (!data) {
-        res.status(404).json({ message: 'Student not found' })
+        res.status(404).json({ message: 'StudentParent not found' })
       } else {
         res.status(200).json(data)
       }
@@ -38,12 +38,15 @@ class StudentController {
   async update(req, res) {
     const { id } = req.params
     try {
-      const [updatedRowsCount, updatedRows] = await Student.update(req.body, {
-        where: { id },
-        returning: true,
-      })
+      const [updatedRowsCount, updatedRows] = await StudentParent.update(
+        req.body,
+        {
+          where: { id },
+          returning: true,
+        }
+      )
       if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'Student not found' })
+        res.status(404).json({ message: 'StudentParent not found' })
       } else {
         res.status(200).json(updatedRows[0])
       }
@@ -55,9 +58,9 @@ class StudentController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const deletedRowCount = await Student.destroy({ where: { id } })
+      const deletedRowCount = await StudentParent.destroy({ where: { id } })
       if (deletedRowCount === 0) {
-        res.status(404).json({ message: 'Student not found' })
+        res.status(404).json({ message: 'StudentParent not found' })
       } else {
         res.status(204).end()
       }
@@ -67,5 +70,5 @@ class StudentController {
   }
 }
 
-const studentController = new StudentController()
-module.exports = studentController
+const studentParentController = new StudentParentController()
+module.exports = studentParentController

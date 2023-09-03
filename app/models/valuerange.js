@@ -1,9 +1,9 @@
 'use strict'
 const { Model } = require('sequelize')
-const { uuid } = require('uuidv4')
+const uuidv4 = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
-  class Department extends Model {
+  class ValueRange extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,30 +13,28 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Department.init(
+  ValueRange.init(
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4, // Automatically generates a UUID for new instances
       },
       idUnit: DataTypes.UUID,
-      code: DataTypes.STRING,
-      name: DataTypes.STRING,
-      expertise: DataTypes.STRING,
-      generalCompetence: DataTypes.STRING,
-      specialCompetence: DataTypes.STRING,
+      idClassroom: DataTypes.UUID,
+      from: DataTypes.INTEGER,
+      to: DataTypes.INTEGER,
+      grade: DataTypes.STRING,
       description: DataTypes.STRING,
-      active: DataTypes.BOOLEAN,
     },
     {
       sequelize,
-      modelName: 'Department',
+      modelName: 'ValueRange',
     }
   )
 
-  Department.beforeCreate((instance, options) => {
-    instance.id = uuid()
+  ValueRange.beforeCreate((instance, options) => {
+    instance.id = uuidv4()
   })
-  return Department
+  return ValueRange
 }
