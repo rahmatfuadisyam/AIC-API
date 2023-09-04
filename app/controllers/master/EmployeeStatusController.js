@@ -1,5 +1,4 @@
 const { EmployeeStatus } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class EmployeeStatusController {
   async create(req, res) {
@@ -16,11 +15,7 @@ class EmployeeStatusController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await EmployeeStatus.findAndCountAll({
-          offset: offset,
-          limit: limit,
-        })
+        data = await EmployeeStatus.findAll()
       } else {
         data = await EmployeeStatus.findByPk(id)
       }

@@ -1,5 +1,4 @@
 const { Building } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class BuildingController {
   async create(req, res) {
@@ -16,10 +15,7 @@ class BuildingController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await Building.findAndCountAll({
-          offset: offset,
-          limit: limit,
+        data = await Building.findAll({
           order: [['code', 'ASC']],
         })
       } else {

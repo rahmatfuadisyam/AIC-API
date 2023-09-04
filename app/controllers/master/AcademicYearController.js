@@ -1,5 +1,4 @@
 const { AcademicYear } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class AcademicYearController {
   async create(req, res) {
@@ -16,11 +15,7 @@ class AcademicYearController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await AcademicYear.findAndCountAll({
-          offset: offset,
-          limit: limit,
-        })
+        data = await AcademicYear.findAll()
       } else {
         data = await AcademicYear.findByPk(id)
       }
