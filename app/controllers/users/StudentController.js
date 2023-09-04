@@ -1,5 +1,4 @@
 const { Student } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class StudentController {
   async create(req, res) {
@@ -16,10 +15,7 @@ class StudentController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await Student.findAndCountAll({
-          offset: offset,
-          limit: limit,
+        data = await Student.findAll({
           order: [['createdAt', 'ASC']],
         })
       } else {

@@ -1,5 +1,4 @@
 const { Department } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class DepartmentController {
   async create(req, res) {
@@ -16,10 +15,7 @@ class DepartmentController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await Department.findAndCountAll({
-          offset: offset,
-          limit: limit,
+        data = await Department.findAll({
           order: [['code', 'ASC']],
         })
       } else {

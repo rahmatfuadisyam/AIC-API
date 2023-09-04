@@ -1,5 +1,4 @@
 const { Unit } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class UnitController {
   async create(req, res) {
@@ -16,11 +15,7 @@ class UnitController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await Unit.findAndCountAll({
-          offset: offset,
-          limit: limit,
-        })
+        data = await Unit.findAll()
       } else {
         data = await Unit.findByPk(id)
       }

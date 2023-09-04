@@ -1,5 +1,4 @@
 const { Inventory } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class InventoryController {
   async create(req, res) {
@@ -16,10 +15,7 @@ class InventoryController {
     try {
       let inventory = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        inventory = await Inventory.findAndCountAll({
-          offset: offset,
-          limit: limit,
+        inventory = await Inventory.findAll({
           order: [['createdAt', 'ASC']],
         })
       } else {

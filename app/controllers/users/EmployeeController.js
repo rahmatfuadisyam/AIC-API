@@ -1,5 +1,4 @@
 const { Employee } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class EmployeeController {
   async create(req, res) {
@@ -16,10 +15,7 @@ class EmployeeController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await Employee.findAndCountAll({
-          offset: offset,
-          limit: limit,
+        data = await Employee.findAll({
           order: [['createdAt', 'ASC']],
         })
       } else {

@@ -1,5 +1,4 @@
 const { StudentParent } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class StudentParentController {
   async create(req, res) {
@@ -16,11 +15,7 @@ class StudentParentController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await StudentParent.findAndCountAll({
-          offset: offset,
-          limit: limit,
-        })
+        data = await StudentParent.findAll()
       } else {
         data = await StudentParent.findByPk(id)
       }
