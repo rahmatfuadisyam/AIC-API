@@ -1,5 +1,4 @@
 const { Curriculum } = require('@models')
-const { paginationService } = require('@services/helper.service')
 
 class CurriculumController {
   async create(req, res) {
@@ -16,12 +15,7 @@ class CurriculumController {
     try {
       let data = null
       if (id === undefined) {
-        const { offset, limit } = paginationService(req.query)
-        data = await Curriculum.findAndCountAll({
-          offset: offset,
-          limit: limit,
-          order: [['name', 'ASC']],
-        })
+        data = await Curriculum.findAll()
       } else {
         data = await Curriculum.findByPk(id)
       }
