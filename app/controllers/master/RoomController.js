@@ -5,8 +5,8 @@ class RoomController {
     try {
       const data = await Room.create(req.body)
       res.status(201).json(data)
-    } catch (error) {
-      res.status(500).json({ error: error.message })
+    } catch (e) {
+      res.status(500).json({ error: e.errors[0].message })
     }
   }
 
