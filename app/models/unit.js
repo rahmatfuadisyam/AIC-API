@@ -11,6 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Unit.hasMany(models.Classroom, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.Department, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.Employee, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.Inventory, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.Lesson, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.LessonGroup, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.LessonSchedule, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.Student, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.ValueRange, { foreignKey: 'idUnit' })
     }
   }
   Unit.init(

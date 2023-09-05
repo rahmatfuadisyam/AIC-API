@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      ValueRange.belongsTo(models.Unit, {
+        as: 'unit',
+        foreignKey: 'idUnit',
+      })
     }
   }
   ValueRange.init(
