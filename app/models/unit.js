@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       code: { type: DataTypes.STRING, unique: true },
       name: DataTypes.STRING,
+      type: DataTypes.ENUM(['Pendidikan', 'Bisnis']),
       description: DataTypes.STRING,
     },
     {
