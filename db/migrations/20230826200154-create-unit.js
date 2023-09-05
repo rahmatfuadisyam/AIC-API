@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      type: {
+        allowNull: false,
+        type: Sequelize.ENUM(['Pendidikan', 'Bisnis']),
+      },
       description: {
         type: Sequelize.STRING,
       },
