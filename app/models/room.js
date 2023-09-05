@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Room.belongsTo(models.Building, {
+        as: 'building',
+        foreignKey: 'idBuilding',
+      })
     }
   }
   Room.init(
@@ -37,5 +41,6 @@ module.exports = (sequelize, DataTypes) => {
   Room.beforeCreate((instance, options) => {
     instance.id = uuid()
   })
+
   return Room
 }
