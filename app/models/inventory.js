@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Inventory.belongsTo(models.Unit, {
+        as: 'unit',
+        foreignKey: 'idUnit',
+      })
     }
   }
   Inventory.init(
