@@ -1,4 +1,4 @@
-const { Room } = require('@models')
+const { Room, Building } = require('@models')
 
 class RoomController {
   async create(req, res) {
@@ -16,6 +16,13 @@ class RoomController {
       let data = null
       if (id === undefined) {
         data = await Room.findAll({
+          include: [
+            {
+              model: Building,
+              as: 'building',
+              attributes: ['name'],
+            },
+          ],
           order: [['code', 'ASC']],
         })
       } else {
