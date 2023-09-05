@@ -20,9 +20,11 @@ module.exports = {
       },
       nipd: {
         type: Sequelize.STRING,
+        unique: true,
       },
       nisn: {
         type: Sequelize.STRING,
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,

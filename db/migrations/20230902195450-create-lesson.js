@@ -26,6 +26,7 @@ module.exports = {
       },
       code: {
         type: Sequelize.STRING,
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,
