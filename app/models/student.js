@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       idClassroom: DataTypes.UUID,
       idDepartment: DataTypes.UUID,
       nipd: DataTypes.STRING,
-      nisn: DataTypes.STRING,
+      nisn: { type: DataTypes.STRING, unique: true },
       name: DataTypes.STRING,
       generation: DataTypes.INTEGER,
       address: DataTypes.STRING,

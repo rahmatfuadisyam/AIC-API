@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       idDepartment: DataTypes.UUID,
       idEmployee: DataTypes.UUID,
       idLessonGroup: DataTypes.UUID,
-      code: DataTypes.STRING,
+      code: { type: DataTypes.STRING, unique: true },
       name: DataTypes.STRING,
       level: DataTypes.STRING,
       basicCompetence: DataTypes.STRING,

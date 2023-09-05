@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
       },
       idBuilding: DataTypes.UUID,
-      code: DataTypes.STRING,
+      code: { type: DataTypes.STRING, unique: true },
       name: DataTypes.STRING,
       lessonCapacity: DataTypes.INTEGER,
       testCapacity: DataTypes.INTEGER,

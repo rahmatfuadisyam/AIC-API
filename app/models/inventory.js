@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
       },
       idUnit: DataTypes.UUID,
-      code: DataTypes.STRING,
+      code: { type: DataTypes.STRING, unique: true },
       name: DataTypes.STRING,
       description: DataTypes.STRING,
       condition: DataTypes.STRING,

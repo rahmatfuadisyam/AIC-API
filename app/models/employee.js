@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4, // Automatically generates a UUID for new instances
       },
       idUnit: DataTypes.UUID,
-      nip: DataTypes.STRING,
+      nip: { type: DataTypes.STRING, unique: true },
       password: DataTypes.STRING,
       name: DataTypes.STRING,
       photo: DataTypes.STRING,
