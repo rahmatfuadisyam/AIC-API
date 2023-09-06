@@ -1,4 +1,4 @@
-const { Department } = require('@models')
+const { Department, Unit } = require('@models')
 
 class DepartmentController {
   async create(req, res) {
@@ -16,6 +16,13 @@ class DepartmentController {
       let data = null
       if (id === undefined) {
         data = await Department.findAll({
+          include: [
+            {
+              model: Unit,
+              as: 'unit',
+              attributes: ['name'],
+            },
+          ],
           order: [['code', 'ASC']],
         })
       } else {
