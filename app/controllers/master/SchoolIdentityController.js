@@ -15,7 +15,7 @@ class SchoolIdentityController {
     try {
       let schoolIdentity = null
       if (id === null) {
-        schoolIdentity = await SchoolIdentity.findAll()
+        schoolIdentity = await SchoolIdentity.findOne()
       } else {
         schoolIdentity = await SchoolIdentity.findByPk(id)
       }
