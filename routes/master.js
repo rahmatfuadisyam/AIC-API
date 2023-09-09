@@ -15,6 +15,7 @@ const {
 } = require('../app/controllers/master')
 
 router.post('/school-identity', schoolIdentityController.create) //insert
+router.get('/school-identity', schoolIdentityController.read) //select by id
 router.get('/school-identity/:id', schoolIdentityController.read) //select by id
 router.put('/school-identity/:id', schoolIdentityController.update) //update
 
