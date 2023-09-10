@@ -14,7 +14,8 @@ class SchoolIdentityController {
     const { id } = req.params
     try {
       let schoolIdentity = null
-      if (id === null) {
+      console.log(id)
+      if (id === undefined) {
         schoolIdentity = await SchoolIdentity.findOne()
       } else {
         schoolIdentity = await SchoolIdentity.findByPk(id)
