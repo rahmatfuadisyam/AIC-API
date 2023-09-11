@@ -1,4 +1,4 @@
-const { Inventory } = require('@models')
+const { Inventory, Unit } = require('@models')
 
 class InventoryController {
   async create(req, res) {
@@ -16,7 +16,14 @@ class InventoryController {
       let inventory = null
       if (id === undefined) {
         inventory = await Inventory.findAll({
-          order: [['createdAt', 'ASC']],
+          include: [
+            {
+              model: Unit,
+              as: 'unit',
+              attributes: ['name'],
+            },
+          ],
+          order: [['createdAt', 'DESC']],
         })
       } else {
         inventory = await Inventory.findByPk(id)
