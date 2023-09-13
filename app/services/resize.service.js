@@ -1,5 +1,5 @@
 const sharp = require('sharp')
-const uuidv4 = require('uuidv4')
+const { uuid } = require('uuidv4')
 const path = require('path')
 
 class Resize {
@@ -20,7 +20,7 @@ class Resize {
     return filename
   }
   static filename(name) {
-    let fileName = `${uuidv4()}${path.extname(name)}`
+    let fileName = `${uuid()}${path.extname(name)}`
     return fileName
   }
   filepath(filename) {

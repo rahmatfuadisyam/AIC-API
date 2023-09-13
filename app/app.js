@@ -4,19 +4,14 @@ const cors = require('cors')
 const { addAlias } = require('module-alias')
 const axios = require('axios')
 
-// const corsOptions = {
-//   origin: ['http://localhost:3000', 'https://rahmatul-asri.netlify.app/'], // Ganti dengan origin Anda
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-// }
-
 //set up the express app
 const app = express()
 app.use(cors())
-// app.use(cors(corsOptions))
 
 // define alias
 addAlias('@models', __dirname + '/models')
 addAlias('@services', __dirname + '/services')
+addAlias('@public', __dirname + '../public')
 
 //set route
 const authRoute = require('../routes/auth')

@@ -68,7 +68,7 @@ class AuthController {
     authService().verify(token, (error, result) => {
       if (error) {
         status = 401
-        message = error.message
+        message = error.errors[0].message
         response = {
           isvalid: false,
         }

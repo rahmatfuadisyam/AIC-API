@@ -6,7 +6,7 @@ class DepartmentController {
       const data = await Department.create(req.body)
       res.status(201).json(data)
     } catch (error) {
-      res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.errors[0].message })
     }
   }
 
@@ -34,7 +34,7 @@ class DepartmentController {
         res.status(200).json(data)
       }
     } catch (error) {
-      res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.errors[0].message })
     }
   }
 
@@ -54,7 +54,7 @@ class DepartmentController {
         res.status(200).json(updatedRows[0])
       }
     } catch (error) {
-      res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.errors[0].message })
     }
   }
 
@@ -68,7 +68,7 @@ class DepartmentController {
         res.status(204).end()
       }
     } catch (error) {
-      res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.errors[0].message })
     }
   }
 }
