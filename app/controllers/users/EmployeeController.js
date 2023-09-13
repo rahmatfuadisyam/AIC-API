@@ -1,13 +1,36 @@
-const { Employee } = require('@models')
+const path = require('path')
+const fs = require('fs')
+const multer = require('multer')
+const upload = multer().single('image')
+const Resize = require('@services/resize.service')
+const { Employee, Unit } = require('@models')
 
 class EmployeeController {
   async create(req, res) {
-    try {
-      const data = await Employee.create(req.body)
-      res.status(201).json(data)
-    } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
-    }
+    let data
+    let image
+    await upload(req, res, async function (err) {
+      try {
+        if (err instanceof multer.MulterError) {
+          return res.status(500).json(err)
+        } else if (err) {
+          return res.status(500).json(err)
+        }
+
+        let item = req.body
+        if (req.file) {
+          const imagePath = path.join(__dirname, '../../public/images/employee')
+          const fileUpload = new Resize(imagePath)
+          image = await fileUpload.save(req.file.buffer, req.file.originalname)
+          item.image = image
+        }
+
+        data = await Employee.create(item)
+        res.status(201).json(data)
+      } catch (error) {
+        res.status(500).json({ error: error.errors[0].message })
+      }
+    })
   }
 
   async read(req, res) {
@@ -16,6 +39,13 @@ class EmployeeController {
       let data = null
       if (id === undefined) {
         data = await Employee.findAll({
+          include: [
+            {
+              model: Unit,
+              as: 'unit',
+              attributes: ['name'],
+            },
+          ],
           order: [['createdAt', 'ASC']],
         })
       } else {
@@ -32,25 +62,57 @@ class EmployeeController {
   }
 
   async update(req, res) {
-    const { id } = req.params
-    try {
-      const [updatedRowsCount, updatedRows] = await Employee.update(req.body, {
-        where: { id },
-        returning: true,
-      })
-      if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'Employee not found' })
-      } else {
-        res.status(200).json(updatedRows[0])
+    let image
+    await upload(req, res, async function (err) {
+      const { id } = req.params
+      try {
+        if (err instanceof multer.MulterError) {
+          return res.status(500).json(err)
+        } else if (err) {
+          return res.status(500).json(err)
+        }
+
+        let item = req.body
+
+        if (req.file) {
+          const imagePath = path.join(__dirname, '../../public/images/employee')
+          const fileUpload = new Resize(imagePath)
+          image = await fileUpload.save(req.file.buffer, req.file.originalname)
+          item.image = image
+
+          const find = await Inventory.findByPk(id)
+          if (find.image !== null) {
+            await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+              if (err) throw err
+            })
+          }
+        }
+
+        const [updatedRowsCount, updatedRows] = await Employee.update(item, {
+          where: { id },
+          returning: true,
+        })
+        if (updatedRowsCount === 0) {
+          res.status(404).json({ message: 'Employee not found' })
+        } else {
+          res.status(200).json(updatedRows[0])
+        }
+      } catch (error) {
+        res.status(500).json({ error: error.errors[0].message })
       }
-    } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
-    }
+    })
   }
 
   async delete(req, res) {
     const { id } = req.params
     try {
+      const imagePath = path.join(__dirname, '../../public/images/employee')
+      const find = await Inventory.findByPk(id)
+      if (find.image !== null) {
+        await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+          if (err) throw err
+        })
+      }
       const deletedRowCount = await Employee.destroy({ where: { id } })
       if (deletedRowCount === 0) {
         res.status(404).json({ message: 'Employee not found' })
