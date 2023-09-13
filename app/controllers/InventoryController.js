@@ -17,25 +17,17 @@ class InventoryController {
           return res.status(500).json(err)
         }
 
-        const imagePath = path.join(__dirname, '../../public/images/inventory')
-        const fileUpload = new Resize(imagePath)
-        image = await fileUpload.save(req.file.buffer, req.file.originalname)
-        const item = {
-          idUnit: req.body.idUnit,
-          code: req.body.code,
-          name: req.body.name,
-          description: req.body.description,
-          condition: req.body.condition,
-          quantity: req.body.quantity,
-          source: req.body.source,
-          receiptDate: req.body.receiptDate,
-          responsiblePerson: req.body.responsiblePerson,
-          image: image,
-          capacity: req.body.capacity,
-          length: req.body.length,
-          height: req.body.height,
-          width: req.body.width,
+        let item = req.body
+        if (req.file) {
+          const imagePath = path.join(
+            __dirname,
+            '../../public/images/inventory'
+          )
+          const fileUpload = new Resize(imagePath)
+          image = await fileUpload.save(req.file.buffer, req.file.originalname)
+          item.image = image
         }
+
         data = await Inventory.create(item)
         res.status(201).json(data)
       } catch (error) {
@@ -47,9 +39,9 @@ class InventoryController {
   async read(req, res) {
     const { id } = req.params
     try {
-      let inventory = null
+      let data = null
       if (id === undefined) {
-        inventory = await Inventory.findAll({
+        data = await Inventory.findAll({
           include: [
             {
               model: Unit,
@@ -60,12 +52,12 @@ class InventoryController {
           order: [['createdAt', 'DESC']],
         })
       } else {
-        inventory = await Inventory.findByPk(id)
+        data = await Inventory.findByPk(id)
       }
-      if (!inventory) {
+      if (!data) {
         res.status(404).json({ message: 'Inventory not found' })
       } else {
-        res.status(200).json(inventory)
+        res.status(200).json(data)
       }
     } catch (error) {
       res.status(500).json({ error: error.errors[0].message })
@@ -83,21 +75,7 @@ class InventoryController {
           return res.status(500).json(err)
         }
 
-        let item = {
-          idUnit: req.body.idUnit,
-          code: req.body.code,
-          name: req.body.name,
-          description: req.body.description,
-          condition: req.body.condition,
-          quantity: req.body.quantity,
-          source: req.body.source,
-          receiptDate: req.body.receiptDate,
-          responsiblePerson: req.body.responsiblePerson,
-          capacity: req.body.capacity,
-          length: req.body.length,
-          height: req.body.height,
-          width: req.body.width,
-        }
+        let item = req.body
 
         if (req.file) {
           const imagePath = path.join(
@@ -109,9 +87,11 @@ class InventoryController {
           item.image = image
 
           const find = await Inventory.findByPk(id)
-          await fs.unlink(`${imagePath}/${find.image}`, function (err) {
-            if (err) throw err
-          })
+          if (find.image !== null) {
+            await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+              if (err) throw err
+            })
+          }
         }
 
         const [updatedRowsCount, updatedRows] = await Inventory.update(item, {
@@ -132,6 +112,13 @@ class InventoryController {
   async delete(req, res) {
     const { id } = req.params
     try {
+      const imagePath = path.join(__dirname, '../../public/images/inventory')
+      const find = await Inventory.findByPk(id)
+      if (find.image !== null) {
+        await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+          if (err) throw err
+        })
+      }
       const deletedRowCount = await Inventory.destroy({ where: { id } })
       if (deletedRowCount === 0) {
         res.status(404).json({ message: 'Inventory not found' })
