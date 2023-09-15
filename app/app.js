@@ -4,9 +4,12 @@ const cors = require('cors')
 const { addAlias } = require('module-alias')
 const axios = require('axios')
 
-//set up the express app
+// set up the express app
 const app = express()
 app.use(cors())
+
+// public path
+app.use('/public', express.static(__dirname + '/../public'))
 
 // define alias
 addAlias('@models', __dirname + '/models')
