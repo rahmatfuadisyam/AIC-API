@@ -116,7 +116,7 @@ class InventoryController {
       const find = await Inventory.findByPk(id)
       if (find.image !== null) {
         await fs.unlink(`${imagePath}/${find.image}`, function (err) {
-          if (err) throw err
+          if (err) console.log('Gambar tidak ditemukan')
         })
       }
       const deletedRowCount = await Inventory.destroy({ where: { id } })
@@ -126,7 +126,7 @@ class InventoryController {
         res.status(204).end()
       }
     } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
+      res.status(500).json({ error: error })
     }
   }
 }
