@@ -3,7 +3,7 @@ const fs = require('fs')
 const multer = require('multer')
 const upload = multer().single('image')
 const Resize = require('@services/resize.service')
-const { Employee, Unit, PtkType, EmployeeStatus } = require('@models')
+const { Employee, Unit, PtkType, EmployeeStatus, Class } = require('@models')
 
 class EmployeeController {
   async create(req, res) {
@@ -54,6 +54,11 @@ class EmployeeController {
             {
               model: EmployeeStatus,
               as: 'employeeStatus',
+              attributes: ['name'],
+            },
+            {
+              model: Class,
+              as: 'class',
               attributes: ['name'],
             },
           ],
