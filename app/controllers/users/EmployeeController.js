@@ -32,8 +32,7 @@ class EmployeeController {
         res.status(201).json(data)
       } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error })
-        // res.status(500).json({ error: 'Create data failed' })
+        res.status(500).json({ error: 'Create data failed' })
       }
     })
   }
@@ -123,8 +122,7 @@ class EmployeeController {
         }
       } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error })
-        // res.status(500).json({ error: 'Update data failed' })
+        res.status(500).json({ error: 'Update data failed' })
       }
     })
   }

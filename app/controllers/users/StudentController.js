@@ -19,10 +19,13 @@ class StudentController {
 
         let item = req.body
         if (req.file) {
-          const imagePath = path.join(__dirname, '../../public/images/student')
+          const imagePath = path.join(
+            __dirname,
+            '../../../public/images/student'
+          )
           const fileUpload = new Resize(imagePath)
           image = await fileUpload.save(req.file.buffer, req.file.originalname)
-          item.image = image
+          item.photo = image
         }
 
         data = await Student.create(item)
@@ -87,14 +90,17 @@ class StudentController {
         let item = req.body
 
         if (req.file) {
-          const imagePath = path.join(__dirname, '../../public/images/student')
+          const imagePath = path.join(
+            __dirname,
+            '../../../public/images/student'
+          )
           const fileUpload = new Resize(imagePath)
           image = await fileUpload.save(req.file.buffer, req.file.originalname)
-          item.image = image
+          item.photo = image
 
-          const find = await Inventory.findByPk(id)
-          if (find.image !== null) {
-            await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+          const find = await Student.findByPk(id)
+          if (find.photo !== null) {
+            await fs.unlink(`${imagePath}/${find.photo}`, function (err) {
               if (err) throw err
             })
           }
@@ -119,10 +125,10 @@ class StudentController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const imagePath = path.join(__dirname, '../../public/images/student')
-      const find = await Inventory.findByPk(id)
-      if (find.image !== null) {
-        await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+      const imagePath = path.join(__dirname, '../../../public/images/student')
+      const find = await Student.findByPk(id)
+      if (find.photo !== null) {
+        await fs.unlink(`${imagePath}/${find.photo}`, function (err) {
           if (err) throw err
         })
       }
