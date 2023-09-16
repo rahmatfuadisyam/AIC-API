@@ -5,7 +5,7 @@ const buildingController = require('./BuildingController')
 const roomController = require('./RoomController')
 const unitController = require('./UnitController')
 const departmentController = require('./DepartmentController')
-const classController = require('./ClassController')
+const gradeController = require('./GradeController')
 const ptkTypeController = require('./PtkTypeController')
 const positionController = require('./PositionController')
 const employeeStatusController = require('./EmployeeStatusController')
@@ -19,7 +19,7 @@ const controllers = {
   roomController,
   unitController,
   departmentController,
-  classController,
+  gradeController,
   ptkTypeController,
   positionController,
   employeeStatusController,

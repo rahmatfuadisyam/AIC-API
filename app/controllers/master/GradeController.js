@@ -1,9 +1,9 @@
-const { Class } = require('@models')
+const { Grade } = require('@models')
 
-class ClassController {
+class GradeController {
   async create(req, res) {
     try {
-      const data = await Class.create(req.body)
+      const data = await Grade.create(req.body)
       res.status(201).json(data)
     } catch (error) {
       console.log(error)
@@ -16,12 +16,12 @@ class ClassController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Class.findAll()
+        data = await Grade.findAll()
       } else {
-        data = await Class.findByPk(id)
+        data = await Grade.findByPk(id)
       }
       if (!data) {
-        res.status(404).json({ message: 'Class not found' })
+        res.status(404).json({ message: 'Grade not found' })
       } else {
         res.status(200).json(data)
       }
@@ -34,12 +34,12 @@ class ClassController {
   async update(req, res) {
     const { id } = req.params
     try {
-      const [updatedRowsCount, updatedRows] = await Class.update(req.body, {
+      const [updatedRowsCount, updatedRows] = await Grade.update(req.body, {
         where: { id },
         returning: true,
       })
       if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'Class not found' })
+        res.status(404).json({ message: 'Grade not found' })
       } else {
         res.status(200).json(updatedRows[0])
       }
@@ -52,9 +52,9 @@ class ClassController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const deletedRowCount = await Class.destroy({ where: { id } })
+      const deletedRowCount = await Grade.destroy({ where: { id } })
       if (deletedRowCount === 0) {
-        res.status(404).json({ message: 'Class not found' })
+        res.status(404).json({ message: 'Grade not found' })
       } else {
         res.status(204).end()
       }
@@ -65,5 +65,5 @@ class ClassController {
   }
 }
 
-const classController = new ClassController()
-module.exports = classController
+const gradeController = new GradeController()
+module.exports = gradeController

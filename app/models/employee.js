@@ -23,9 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'employeeStatus',
         foreignKey: 'idEmployeeStatus',
       })
-      Employee.belongsTo(models.Class, {
-        as: 'class',
-        foreignKey: 'idClass',
+      Employee.belongsTo(models.Grade, {
+        as: 'grade',
+        foreignKey: 'idGrade',
       })
     }
   }
@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
       appointmentSk: DataTypes.STRING,
       appointmentTmt: DataTypes.STRING,
       appointmentAgency: DataTypes.STRING,
-      idClass: DataTypes.STRING,
+      idGrade: DataTypes.STRING,
       salarySource: DataTypes.STRING,
       laboratoryExpert: DataTypes.STRING,
       biologicalMotherName: DataTypes.STRING,
