@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'building',
         foreignKey: 'idBuilding',
       })
+      Room.hasMany(models.Classroom, { foreignKey: 'idRoom' })
     }
   }
   Room.init(

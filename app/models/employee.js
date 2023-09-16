@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'grade',
         foreignKey: 'idGrade',
       })
+      Employee.hasOne(models.Classroom, { foreignKey: 'idEmployee' })
     }
   }
   Employee.init(
