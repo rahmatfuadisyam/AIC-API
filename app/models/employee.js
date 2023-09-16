@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'employeeStatus',
         foreignKey: 'idEmployeeStatus',
       })
+      Employee.belongsTo(models.Class, {
+        as: 'class',
+        foreignKey: 'idClass',
+      })
     }
   }
   Employee.init(
@@ -36,7 +40,6 @@ module.exports = (sequelize, DataTypes) => {
       nip: { type: DataTypes.STRING, unique: true },
       password: DataTypes.STRING,
       name: DataTypes.STRING,
-      photo: DataTypes.STRING,
       birthPlace: DataTypes.STRING,
       birthDate: DataTypes.DATEONLY,
       gender: DataTypes.STRING,
@@ -64,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
       appointmentSk: DataTypes.STRING,
       appointmentTmt: DataTypes.STRING,
       appointmentAgency: DataTypes.STRING,
-      class: DataTypes.STRING,
+      idClass: DataTypes.STRING,
       salarySource: DataTypes.STRING,
       laboratoryExpert: DataTypes.STRING,
       biologicalMotherName: DataTypes.STRING,

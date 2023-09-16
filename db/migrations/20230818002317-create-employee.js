@@ -106,8 +106,8 @@ module.exports = {
       appointmentAgency: {
         type: Sequelize.STRING,
       },
-      class: {
-        type: Sequelize.STRING,
+      idClass: {
+        type: Sequelize.UUID,
       },
       salarySource: {
         type: Sequelize.STRING,
