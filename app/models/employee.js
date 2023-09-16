@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         as: 'unit',
         foreignKey: 'idUnit',
       })
+      Employee.belongsTo(models.PtkType, {
+        as: 'ptkType',
+        foreignKey: 'idPtkType',
+      })
+      Employee.belongsTo(models.EmployeeStatus, {
+        as: 'employeeStatus',
+        foreignKey: 'idEmployeeStatus',
+      })
     }
   }
   Employee.init(
@@ -66,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
       tmtPns: DataTypes.STRING,
       headmasterLicense: DataTypes.STRING,
       builtSchoolsCount: DataTypes.STRING,
-      supervision_training: DataTypes.STRING,
+      supervisionTraining: DataTypes.STRING,
       kkHandle: DataTypes.STRING,
       breileExpert: DataTypes.STRING,
       signLangExpert: DataTypes.STRING,

@@ -3,7 +3,7 @@ const fs = require('fs')
 const multer = require('multer')
 const upload = multer().single('image')
 const Resize = require('@services/resize.service')
-const { Employee, Unit } = require('@models')
+const { Employee, Unit, PtkType, EmployeeStatus } = require('@models')
 
 class EmployeeController {
   async create(req, res) {
@@ -28,7 +28,8 @@ class EmployeeController {
         data = await Employee.create(item)
         res.status(201).json(data)
       } catch (error) {
-        res.status(500).json({ error: error.errors[0].message })
+        console.log(error)
+        res.status(500).json({ error: 'Create data failed' })
       }
     })
   }
@@ -45,6 +46,16 @@ class EmployeeController {
               as: 'unit',
               attributes: ['name'],
             },
+            {
+              model: PtkType,
+              as: 'ptkType',
+              attributes: ['name'],
+            },
+            {
+              model: EmployeeStatus,
+              as: 'employeeStatus',
+              attributes: ['name'],
+            },
           ],
           order: [['createdAt', 'ASC']],
         })
@@ -57,7 +68,8 @@ class EmployeeController {
         res.status(200).json(data)
       }
     } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
+      console.log(error)
+      res.status(500).json({ error: 'Read data failed' })
     }
   }
 
@@ -98,7 +110,8 @@ class EmployeeController {
           res.status(200).json(updatedRows[0])
         }
       } catch (error) {
-        res.status(500).json({ error: error.errors[0].message })
+        console.log(error)
+        res.status(500).json({ error: 'Update data failed' })
       }
     })
   }
@@ -120,7 +133,8 @@ class EmployeeController {
         res.status(204).end()
       }
     } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
+      console.log(error)
+      res.status(500).json({ error: 'Delete data failed' })
     }
   }
 }
