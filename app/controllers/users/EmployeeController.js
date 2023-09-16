@@ -95,12 +95,15 @@ class EmployeeController {
         let item = req.body
 
         if (req.file) {
-          const imagePath = path.join(__dirname, '../../public/images/employee')
+          const imagePath = path.join(
+            __dirname,
+            '../../../public/images/employee'
+          )
           const fileUpload = new Resize(imagePath)
           image = await fileUpload.save(req.file.buffer, req.file.originalname)
           item.image = image
 
-          const find = await Inventory.findByPk(id)
+          const find = await Employee.findByPk(id)
           if (find.image !== null) {
             await fs.unlink(`${imagePath}/${find.image}`, function (err) {
               if (err) throw err
@@ -128,9 +131,9 @@ class EmployeeController {
     const { id } = req.params
     try {
       const imagePath = path.join(__dirname, '../../public/images/employee')
-      const find = await Inventory.findByPk(id)
-      if (find.image !== null) {
-        await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+      const find = await Employee.findByPk(id)
+      if (find.photo !== null) {
+        await fs.unlink(`${imagePath}/${find.photo}`, function (err) {
           if (err) throw err
         })
       }
