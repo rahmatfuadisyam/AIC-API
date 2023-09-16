@@ -70,13 +70,13 @@ module.exports = {
       studyExpertise: {
         type: Sequelize.STRING,
       },
-      ptkType: {
+      idPtkType: {
         type: Sequelize.UUID,
       },
       optionalTask: {
         type: Sequelize.STRING,
       },
-      employeeStatus: {
+      idEmployeeStatus: {
         type: Sequelize.UUID,
       },
       activeStatus: {

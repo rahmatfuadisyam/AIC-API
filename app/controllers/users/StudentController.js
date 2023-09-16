@@ -28,7 +28,8 @@ class StudentController {
         data = await Student.create(item)
         res.status(201).json(data)
       } catch (error) {
-        res.status(500).json({ error: error.errors[0].message })
+        console.log(error)
+        res.status(500).json({ error: 'Create data failed' })
       }
     })
   }
@@ -67,7 +68,8 @@ class StudentController {
         res.status(200).json(data)
       }
     } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
+      console.log(error)
+      res.status(500).json({ error: 'Read data failed' })
     }
   }
 
@@ -108,7 +110,8 @@ class StudentController {
           res.status(200).json(updatedRows[0])
         }
       } catch (error) {
-        res.status(500).json({ error: error.errors[0].message })
+        console.log(error)
+        res.status(500).json({ error: 'Update data failed' })
       }
     })
   }
@@ -130,7 +133,8 @@ class StudentController {
         res.status(204).end()
       }
     } catch (error) {
-      res.status(500).json({ error: error.errors[0].message })
+      console.log(error)
+      res.status(500).json({ error: 'Delete data failed' })
     }
   }
 }
