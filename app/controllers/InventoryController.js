@@ -104,7 +104,7 @@ class InventoryController {
           res.status(200).json(updatedRows[0])
         }
       } catch (error) {
-        res.status(500).json({ error: error.errors[0].message })
+        res.status(500).json({ error: error })
       }
     })
   }
