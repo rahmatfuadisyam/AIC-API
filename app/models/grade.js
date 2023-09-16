@@ -3,7 +3,7 @@ const { Model } = require('sequelize')
 const { uuid } = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
-  class Class extends Model {
+  class Grade extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Class.init(
+  Grade.init(
     {
       id: {
         type: DataTypes.UUID,
@@ -25,12 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Class',
+      modelName: 'Grade',
     }
   )
 
-  Class.beforeCreate((instance, options) => {
+  Grade.beforeCreate((instance, options) => {
     instance.id = uuid()
   })
-  return Class
+  return Grade
 }

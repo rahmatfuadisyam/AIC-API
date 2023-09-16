@@ -106,7 +106,7 @@ module.exports = {
       appointmentAgency: {
         type: Sequelize.STRING,
       },
-      idClass: {
+      idGrade: {
         type: Sequelize.UUID,
       },
       salarySource: {
