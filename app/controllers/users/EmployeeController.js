@@ -25,7 +25,7 @@ class EmployeeController {
           )
           const fileUpload = new Resize(imagePath)
           image = await fileUpload.save(req.file.buffer, req.file.originalname)
-          item.image = image
+          item.photo = image
         }
 
         data = await Employee.create(item)
@@ -101,11 +101,11 @@ class EmployeeController {
           )
           const fileUpload = new Resize(imagePath)
           image = await fileUpload.save(req.file.buffer, req.file.originalname)
-          item.image = image
+          item.photo = image
 
           const find = await Employee.findByPk(id)
-          if (find.image !== null) {
-            await fs.unlink(`${imagePath}/${find.image}`, function (err) {
+          if (find.photo !== null) {
+            await fs.unlink(`${imagePath}/${find.photo}`, function (err) {
               if (err) throw err
             })
           }
@@ -130,7 +130,7 @@ class EmployeeController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const imagePath = path.join(__dirname, '../../public/images/employee')
+      const imagePath = path.join(__dirname, '../../../public/images/employee')
       const find = await Employee.findByPk(id)
       if (find.photo !== null) {
         await fs.unlink(`${imagePath}/${find.photo}`, function (err) {
