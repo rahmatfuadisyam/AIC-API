@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      PtkType.hasMany(models.Employee, { foreignKey: 'idPtkType' })
     }
   }
   PtkType.init(
