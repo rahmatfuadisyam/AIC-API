@@ -3,7 +3,7 @@ const { Model } = require('sequelize')
 const { uuid } = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
-  class ValueRange extends Model {
+  class PtkType extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,34 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ValueRange.belongsTo(models.Unit, {
-        as: 'unit',
-        foreignKey: 'idUnit',
-      })
     }
   }
-  ValueRange.init(
+  PtkType.init(
     {
       id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4, // Automatically generates a UUID for new instances
       },
-      idUnit: DataTypes.UUID,
-      idClassroom: DataTypes.UUID,
-      from: DataTypes.INTEGER,
-      to: DataTypes.INTEGER,
-      grade: DataTypes.STRING,
+      name: DataTypes.STRING,
       description: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: 'ValueRange',
+      modelName: 'PtkType',
     }
   )
 
-  ValueRange.beforeCreate((instance, options) => {
+  PtkType.beforeCreate((instance, options) => {
     instance.id = uuid()
   })
-  return ValueRange
+  return PtkType
 }

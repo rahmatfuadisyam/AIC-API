@@ -1,6 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
-const uuidv4 = require('uuidv4')
+const { uuid } = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
   class LessonSchedule extends Model {
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
   )
 
   LessonSchedule.beforeCreate((instance, options) => {
-    instance.id = uuidv4()
+    instance.id = uuid()
   })
   return LessonSchedule
 }

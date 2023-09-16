@@ -1,6 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
-const uuidv4 = require('uuidv4')
+const { uuid } = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
@@ -44,9 +44,9 @@ module.exports = (sequelize, DataTypes) => {
       postalCode: DataTypes.STRING,
       nuptk: DataTypes.STRING,
       studyExpertise: DataTypes.STRING,
-      ptkType: DataTypes.UUID,
+      idPtkType: DataTypes.UUID,
       optionalTask: DataTypes.STRING,
-      employeeStatus: DataTypes.UUID,
+      idEmployeeStatus: DataTypes.UUID,
       activeStatus: DataTypes.STRING,
       marriageStatus: DataTypes.STRING,
       photo: DataTypes.STRING,
@@ -83,7 +83,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Adding a "beforeCreate" hook to generate UUID for the "id" field
   Employee.beforeCreate((instance, options) => {
-    instance.id = uuidv4()
+    instance.id = uuid()
   })
 
   return Employee
