@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const multer = require('multer')
-const upload = multer().single('image')
+const upload = multer().single('photo')
 const Resize = require('@services/resize.service')
 const { Employee, Unit, PtkType, EmployeeStatus, Grade } = require('@models')
 
@@ -19,7 +19,10 @@ class EmployeeController {
 
         let item = req.body
         if (req.file) {
-          const imagePath = path.join(__dirname, '../../public/images/employee')
+          const imagePath = path.join(
+            __dirname,
+            '../../../public/images/employee'
+          )
           const fileUpload = new Resize(imagePath)
           image = await fileUpload.save(req.file.buffer, req.file.originalname)
           item.image = image
