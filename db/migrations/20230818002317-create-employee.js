@@ -134,7 +134,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       builtSchoolsCount: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       supervisionTraining: {
         type: Sequelize.STRING,
@@ -151,10 +151,7 @@ module.exports = {
       citizenship: {
         type: Sequelize.STRING,
       },
-      niy: {
-        type: Sequelize.STRING,
-      },
-      nigk: {
+      niynigk: {
         type: Sequelize.STRING,
       },
       npwp: {
