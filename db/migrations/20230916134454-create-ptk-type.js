@@ -2,20 +2,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('LessonGroups', {
+    await queryInterface.createTable('PtkTypes', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      idUnit: {
-        type: Sequelize.UUID,
-      },
-      type: {
+      name: {
         type: Sequelize.STRING,
       },
-      name: {
+      description: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -29,6 +26,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('LessonGroups')
+    await queryInterface.dropTable('PtkTypes')
   },
 }

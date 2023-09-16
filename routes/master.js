@@ -9,6 +9,7 @@ const {
   unitController,
   departmentController,
   classController,
+  ptkTypeController,
   positionController,
   employeeStatusController,
   classroomController,
@@ -60,6 +61,12 @@ router.get('/class', classController.read) //select all
 router.get('/class/:id', classController.read) //select by id
 router.put('/class/:id', classController.update) //update
 router.delete('/class/:id', classController.delete) //delete
+
+router.post('/ptk-type', ptkTypeController.create) //insert
+router.get('/ptk-type', ptkTypeController.read) //select all
+router.get('/ptk-type/:id', ptkTypeController.read) //select by id
+router.put('/ptk-type/:id', ptkTypeController.update) //update
+router.delete('/ptk-type/:id', ptkTypeController.delete) //delete
 
 router.post('/position', positionController.create) //insert
 router.get('/position', positionController.read) //select all
