@@ -1,4 +1,11 @@
-const { Classroom } = require('@models')
+const {
+  Classroom,
+  Unit,
+  Employee,
+  Department,
+  Building,
+  Room,
+} = require('@models')
 
 class ClassroomController {
   async create(req, res) {
@@ -17,6 +24,33 @@ class ClassroomController {
       let data = null
       if (id === undefined) {
         data = await Classroom.findAll({
+          include: [
+            {
+              model: Unit,
+              as: 'unit',
+              attributes: ['name'],
+            },
+            {
+              model: Employee,
+              as: 'employee',
+              attributes: ['name'],
+            },
+            {
+              model: Department,
+              as: 'department',
+              attributes: ['name'],
+            },
+            {
+              model: Building,
+              as: 'building',
+              attributes: ['name'],
+            },
+            {
+              model: Room,
+              as: 'room',
+              attributes: ['name'],
+            },
+          ],
           order: [['code', 'ASC']],
         })
       } else {

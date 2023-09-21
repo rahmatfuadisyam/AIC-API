@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      idTeacher: {
+      idEmployee: {
         type: Sequelize.UUID,
       },
       idDepartment: {
