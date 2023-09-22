@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const multer = require('multer')
-const upload = multer().single('image')
+const upload = multer().single('photo')
 const Resize = require('@services/resize.service')
 const { Student, Unit, Classroom, Department } = require('@models')
 
