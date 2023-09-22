@@ -80,10 +80,10 @@ module.exports = {
         type: Sequelize.UUID,
       },
       activeStatus: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       marriageStatus: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       photo: {
         type: Sequelize.STRING,
