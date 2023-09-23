@@ -16,7 +16,7 @@ class CurriculumController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Curriculum.findAll()
+        data = await Curriculum.findAll({ order: [['createdAt', 'DESC']] })
       } else {
         data = await Curriculum.findByPk(id)
       }

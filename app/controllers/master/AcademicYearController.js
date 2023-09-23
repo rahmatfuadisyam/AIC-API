@@ -16,7 +16,7 @@ class AcademicYearController {
     try {
       let data = null
       if (id === undefined) {
-        data = await AcademicYear.findAll()
+        data = await AcademicYear.findAll({ order: [['createdAt', 'DESC']] })
       } else {
         data = await AcademicYear.findByPk(id)
       }

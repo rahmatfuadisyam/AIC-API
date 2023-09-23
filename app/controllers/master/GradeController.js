@@ -16,7 +16,7 @@ class GradeController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Grade.findAll()
+        data = await Grade.findAll({ order: [['createdAt', 'ASC']] })
       } else {
         data = await Grade.findByPk(id)
       }

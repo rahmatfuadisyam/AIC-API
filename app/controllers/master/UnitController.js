@@ -16,7 +16,7 @@ class UnitController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Unit.findAll()
+        data = await Unit.findAll({ order: [['code', 'ASC']] })
       } else {
         data = await Unit.findByPk(id)
       }

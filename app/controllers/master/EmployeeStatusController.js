@@ -16,7 +16,7 @@ class EmployeeStatusController {
     try {
       let data = null
       if (id === undefined) {
-        data = await EmployeeStatus.findAll()
+        data = await EmployeeStatus.findAll({ order: [['createdAt', 'ASC']] })
       } else {
         data = await EmployeeStatus.findByPk(id)
       }
