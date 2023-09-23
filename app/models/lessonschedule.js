@@ -15,6 +15,26 @@ module.exports = (sequelize, DataTypes) => {
         as: 'unit',
         foreignKey: 'idUnit',
       })
+      LessonSchedule.belongsTo(models.AcademicYear, {
+        as: 'academicYear',
+        foreignKey: 'idAcademicYear',
+      })
+      LessonSchedule.belongsTo(models.Classroom, {
+        as: 'classroom',
+        foreignKey: 'idClassroom',
+      })
+      LessonSchedule.belongsTo(models.Lesson, {
+        as: 'lesson',
+        foreignKey: 'idLesson',
+      })
+      LessonSchedule.belongsTo(models.Room, {
+        as: 'room',
+        foreignKey: 'idRoom',
+      })
+      LessonSchedule.belongsTo(models.Employee, {
+        as: 'employee',
+        foreignKey: 'idEmployee',
+      })
     }
   }
   LessonSchedule.init(

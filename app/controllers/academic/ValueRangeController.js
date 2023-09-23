@@ -1,9 +1,9 @@
-const { LessonGroup, Unit } = require('@models')
+const { Lesson, Unit, Classroom } = require('@models')
 
-class LessonGroupController {
+class ValueRangeController {
   async create(req, res) {
     try {
-      const data = await LessonGroup.create(req.body)
+      const data = await Lesson.create(req.body)
       res.status(201).json(data)
     } catch (error) {
       console.log(error)
@@ -16,20 +16,25 @@ class LessonGroupController {
     try {
       let data = null
       if (id === undefined) {
-        data = await LessonGroup.findAll({
+        data = await Lesson.findAll({
           include: [
             {
               model: Unit,
               as: 'unit',
               attributes: ['name'],
             },
+            {
+              model: Classroom,
+              as: 'classroom',
+              attributes: ['name'],
+            },
           ],
         })
       } else {
-        data = await LessonGroup.findByPk(id)
+        data = await Lesson.findByPk(id)
       }
       if (!data) {
-        res.status(404).json({ message: 'LessonGroup not found' })
+        res.status(404).json({ message: 'Lesson not found' })
       } else {
         res.status(200).json(data)
       }
@@ -42,15 +47,12 @@ class LessonGroupController {
   async update(req, res) {
     const { id } = req.params
     try {
-      const [updatedRowsCount, updatedRows] = await LessonGroup.update(
-        req.body,
-        {
-          where: { id },
-          returning: true,
-        }
-      )
+      const [updatedRowsCount, updatedRows] = await Lesson.update(req.body, {
+        where: { id },
+        returning: true,
+      })
       if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'LessonGroup not found' })
+        res.status(404).json({ message: 'Lesson not found' })
       } else {
         res.status(200).json(updatedRows[0])
       }
@@ -63,9 +65,9 @@ class LessonGroupController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const deletedRowCount = await LessonGroup.destroy({ where: { id } })
+      const deletedRowCount = await Lesson.destroy({ where: { id } })
       if (deletedRowCount === 0) {
-        res.status(404).json({ message: 'LessonGroup not found' })
+        res.status(404).json({ message: 'Lesson not found' })
       } else {
         res.status(204).end()
       }
@@ -76,5 +78,5 @@ class LessonGroupController {
   }
 }
 
-const lessonGroupController = new LessonGroupController()
-module.exports = lessonGroupController
+const valueRangeController = new ValueRangeController()
+module.exports = valueRangeController
