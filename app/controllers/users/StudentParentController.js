@@ -1,4 +1,4 @@
-const { StudentParent } = require('@models')
+const { StudentParent, Student } = require('@models')
 
 class StudentParentController {
   async create(req, res) {
@@ -16,7 +16,15 @@ class StudentParentController {
     try {
       let data = null
       if (id === undefined) {
-        data = await StudentParent.findAll()
+        data = await StudentParent.findAll({
+          include: [
+            {
+              model: Student,
+              as: 'student',
+              attributes: ['name'],
+            },
+          ],
+        })
       } else {
         data = await StudentParent.findByPk(id)
       }
