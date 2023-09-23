@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'unit',
         foreignKey: 'idUnit',
       })
+      ValueRange.belongsTo(models.Classroom, {
+        as: 'unit',
+        foreignKey: 'idClassroom',
+      })
     }
   }
   ValueRange.init(

@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'unit',
         foreignKey: 'idUnit',
       })
+      LessonGroup.hasMany(models.Lesson, { foreignKey: 'idLessonGroup' })
     }
   }
   LessonGroup.init(
