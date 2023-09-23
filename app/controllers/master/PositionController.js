@@ -16,7 +16,7 @@ class PositionController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Position.findAll()
+        data = await Position.findAll({ order: [['createdAt', 'ASC']] })
       } else {
         data = await Position.findByPk(id)
       }

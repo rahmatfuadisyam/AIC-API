@@ -51,6 +51,7 @@ class LessonController {
               attributes: ['name'],
             },
           ],
+          order: [['createdAt', 'DESC']],
         })
       } else {
         data = await Lesson.findByPk(id)

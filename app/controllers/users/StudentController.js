@@ -60,7 +60,7 @@ class StudentController {
               attributes: ['name'],
             },
           ],
-          order: [['createdAt', 'ASC']],
+          order: [['nisn', 'ASC']],
         })
       } else {
         data = await Student.findByPk(id)

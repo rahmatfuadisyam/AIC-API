@@ -65,7 +65,7 @@ class EmployeeController {
               attributes: ['name'],
             },
           ],
-          order: [['createdAt', 'ASC']],
+          order: [['name', 'ASC']],
         })
       } else {
         data = await Employee.findByPk(id)

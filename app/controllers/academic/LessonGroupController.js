@@ -24,6 +24,7 @@ class LessonGroupController {
               attributes: ['name'],
             },
           ],
+          order: [['createdAt', 'DESC']],
         })
       } else {
         data = await LessonGroup.findByPk(id)

@@ -16,7 +16,7 @@ class PtkTypeController {
     try {
       let data = null
       if (id === undefined) {
-        data = await PtkType.findAll()
+        data = await PtkType.findAll({ order: [['createdAt', 'ASC']] })
       } else {
         data = await PtkType.findByPk(id)
       }
