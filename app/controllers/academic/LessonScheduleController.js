@@ -3,7 +3,6 @@ const {
   Unit,
   AcademicYear,
   Classroom,
-  Lesson,
   Room,
   Employee,
 } = require('@models')

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'idUnit',
       })
       ValueRange.belongsTo(models.Classroom, {
-        as: 'unit',
+        as: 'classroom',
         foreignKey: 'idClassroom',
       })
     }
