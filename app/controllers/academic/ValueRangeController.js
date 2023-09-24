@@ -1,9 +1,9 @@
-const { Lesson, Unit, Classroom } = require('@models')
+const { ValueRange, Unit, Classroom } = require('@models')
 
 class ValueRangeController {
   async create(req, res) {
     try {
-      const data = await Lesson.create(req.body)
+      const data = await ValueRange.create(req.body)
       res.status(201).json(data)
     } catch (error) {
       console.log(error)
@@ -16,7 +16,7 @@ class ValueRangeController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Lesson.findAll({
+        data = await ValueRange.findAll({
           include: [
             {
               model: Unit,
@@ -32,10 +32,10 @@ class ValueRangeController {
           order: [['createdAt', 'DESC']],
         })
       } else {
-        data = await Lesson.findByPk(id)
+        data = await ValueRange.findByPk(id)
       }
       if (!data) {
-        res.status(404).json({ message: 'Lesson not found' })
+        res.status(404).json({ message: 'ValueRange not found' })
       } else {
         res.status(200).json(data)
       }
@@ -48,12 +48,15 @@ class ValueRangeController {
   async update(req, res) {
     const { id } = req.params
     try {
-      const [updatedRowsCount, updatedRows] = await Lesson.update(req.body, {
-        where: { id },
-        returning: true,
-      })
+      const [updatedRowsCount, updatedRows] = await ValueRange.update(
+        req.body,
+        {
+          where: { id },
+          returning: true,
+        }
+      )
       if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'Lesson not found' })
+        res.status(404).json({ message: 'ValueRange not found' })
       } else {
         res.status(200).json(updatedRows[0])
       }
@@ -66,9 +69,9 @@ class ValueRangeController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const deletedRowCount = await Lesson.destroy({ where: { id } })
+      const deletedRowCount = await ValueRange.destroy({ where: { id } })
       if (deletedRowCount === 0) {
-        res.status(404).json({ message: 'Lesson not found' })
+        res.status(404).json({ message: 'ValueRange not found' })
       } else {
         res.status(204).end()
       }
