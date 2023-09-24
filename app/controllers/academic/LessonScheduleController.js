@@ -1,4 +1,5 @@
 const {
+  LessonSchedule,
   Lesson,
   Unit,
   AcademicYear,
@@ -10,7 +11,7 @@ const {
 class LessonScheduleController {
   async create(req, res) {
     try {
-      const data = await Lesson.create(req.body)
+      const data = await LessonSchedule.create(req.body)
       res.status(201).json(data)
     } catch (error) {
       console.log(error)
@@ -23,7 +24,7 @@ class LessonScheduleController {
     try {
       let data = null
       if (id === undefined) {
-        data = await Lesson.findAll({
+        data = await LessonSchedule.findAll({
           include: [
             {
               model: Unit,
@@ -59,10 +60,10 @@ class LessonScheduleController {
           order: [['createdAt', 'DESC']],
         })
       } else {
-        data = await Lesson.findByPk(id)
+        data = await LessonSchedule.findByPk(id)
       }
       if (!data) {
-        res.status(404).json({ message: 'Lesson not found' })
+        res.status(404).json({ message: 'LessonSchedule not found' })
       } else {
         res.status(200).json(data)
       }
@@ -75,12 +76,15 @@ class LessonScheduleController {
   async update(req, res) {
     const { id } = req.params
     try {
-      const [updatedRowsCount, updatedRows] = await Lesson.update(req.body, {
-        where: { id },
-        returning: true,
-      })
+      const [updatedRowsCount, updatedRows] = await LessonSchedule.update(
+        req.body,
+        {
+          where: { id },
+          returning: true,
+        }
+      )
       if (updatedRowsCount === 0) {
-        res.status(404).json({ message: 'Lesson not found' })
+        res.status(404).json({ message: 'LessonSchedule not found' })
       } else {
         res.status(200).json(updatedRows[0])
       }
@@ -93,9 +97,9 @@ class LessonScheduleController {
   async delete(req, res) {
     const { id } = req.params
     try {
-      const deletedRowCount = await Lesson.destroy({ where: { id } })
+      const deletedRowCount = await LessonSchedule.destroy({ where: { id } })
       if (deletedRowCount === 0) {
-        res.status(404).json({ message: 'Lesson not found' })
+        res.status(404).json({ message: 'LessonSchedule not found' })
       } else {
         res.status(204).end()
       }
