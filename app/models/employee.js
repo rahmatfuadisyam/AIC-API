@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       })
       Employee.hasOne(models.Classroom, { foreignKey: 'idEmployee' })
       Employee.hasMany(models.LessonSchedule, { foreignKey: 'idEmployee' })
+      Employee.hasMany(models.StudentPresence, { foreignKey: 'idEmployee' })
+      Employee.hasMany(models.EmployeePresence, { foreignKey: 'idEmployee' })
+      Employee.hasMany(models.StudentGrades, { foreignKey: 'idEmployee' })
     }
   }
   Employee.init(

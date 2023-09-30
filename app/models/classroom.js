@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
       })
       Classroom.hasMany(models.LessonSchedule, { foreignKey: 'idClassroom' })
       Classroom.hasMany(models.ValueRange, { foreignKey: 'idClassroom' })
+      Classroom.hasMany(models.StudentPresence, { foreignKey: 'idClassroom' })
+      Classroom.hasMany(models.StudentGrades, { foreignKey: 'idClassroom' })
     }
   }
   Classroom.init(

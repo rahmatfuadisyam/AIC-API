@@ -3,7 +3,7 @@ const { Model } = require('sequelize')
 const { uuid } = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
-  class employeePresence extends Model {
+  class EmployeePresence extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,21 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      employeePresence.belongsTo(models.Unit, {
+      EmployeePresence.belongsTo(models.Unit, {
         as: 'unit',
         foreignKey: 'idUnit',
       })
-      employeePresence.belongsTo(models.AcademicYear, {
+      EmployeePresence.belongsTo(models.AcademicYear, {
         as: 'academicYear',
         foreignKey: 'idAcademicYear',
       })
-      employeePresence.belongsTo(models.Employee, {
+      EmployeePresence.belongsTo(models.Employee, {
         as: 'employee',
         foreignKey: 'idEmployee',
       })
     }
   }
-  employeePresence.init(
+  EmployeePresence.init(
     {
       idUnit: DataTypes.UUID,
       idAcademicYear: DataTypes.UUID,
@@ -34,12 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'employeePresence',
+      modelName: 'EmployeePresence',
     }
   )
 
-  employeePresence.beforeCreate((instance, options) => {
+  EmployeePresence.beforeCreate((instance, options) => {
     instance.id = uuid()
   })
-  return employeePresence
+  return EmployeePresence
 }

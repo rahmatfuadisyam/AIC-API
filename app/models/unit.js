@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       Unit.hasMany(models.LessonSchedule, { foreignKey: 'idUnit' })
       Unit.hasMany(models.Student, { foreignKey: 'idUnit' })
       Unit.hasMany(models.ValueRange, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.StudentPresence, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.EmployeePresence, { foreignKey: 'idUnit' })
+      Unit.hasMany(models.StudentGrades, { foreignKey: 'idUnit' })
     }
   }
   Unit.init(

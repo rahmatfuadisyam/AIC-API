@@ -14,6 +14,15 @@ module.exports = (sequelize, DataTypes) => {
       AcademicYear.hasMany(models.LessonSchedule, {
         foreignKey: 'idAcademicYear',
       })
+      AcademicYear.hasMany(models.StudentPresence, {
+        foreignKey: 'idAcademicYear',
+      })
+      AcademicYear.hasMany(models.EmployeePresence, {
+        foreignKey: 'idAcademicYear',
+      })
+      AcademicYear.hasMany(models.StudentGrades, {
+        foreignKey: 'idAcademicYear',
+      })
     }
   }
   AcademicYear.init(

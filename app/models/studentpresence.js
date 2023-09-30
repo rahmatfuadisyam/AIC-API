@@ -3,7 +3,7 @@ const { Model } = require('sequelize')
 const { uuid } = require('uuidv4')
 
 module.exports = (sequelize, DataTypes) => {
-  class studentPresence extends Model {
+  class StudentPresence extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,37 +11,33 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      studentPresence.belongsTo(models.Unit, {
+      StudentPresence.belongsTo(models.Unit, {
         as: 'unit',
         foreignKey: 'idUnit',
       })
-      studentPresence.belongsTo(models.AcademicYear, {
+      StudentPresence.belongsTo(models.AcademicYear, {
         as: 'academicYear',
         foreignKey: 'idAcademicYear',
       })
-      studentPresence.belongsTo(models.Classroom, {
+      StudentPresence.belongsTo(models.Classroom, {
         as: 'classroom',
         foreignKey: 'idClassroom',
       })
-      studentPresence.belongsTo(models.LessonSchedule, {
+      StudentPresence.belongsTo(models.LessonSchedule, {
         as: 'lessonSchedule',
         foreignKey: 'idLessonSchedule',
       })
-      studentPresence.belongsTo(models.LessonSchedule, {
-        as: 'lessonSchedule',
-        foreignKey: 'idLessonSchedule',
-      })
-      studentPresence.belongsTo(models.Employee, {
+      StudentPresence.belongsTo(models.Employee, {
         as: 'employee',
         foreignKey: 'idEmployee',
       })
-      studentPresence.belongsTo(models.Student, {
+      StudentPresence.belongsTo(models.Student, {
         as: 'student',
         foreignKey: 'idStudent',
       })
     }
   }
-  studentPresence.init(
+  StudentPresence.init(
     {
       idUnit: DataTypes.UUID,
       idAcademicYear: DataTypes.UUID,
@@ -53,12 +49,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'studentPresence',
+      modelName: 'StudentPresence',
     }
   )
 
-  studentPresence.beforeCreate((instance, options) => {
+  StudentPresence.beforeCreate((instance, options) => {
     instance.id = uuid()
   })
-  return studentPresence
+  return StudentPresence
 }
