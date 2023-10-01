@@ -3,6 +3,11 @@ const { AcademicYear } = require('@models')
 class AcademicYearController {
   async create(req, res) {
     try {
+      if (req.body.active === true) {
+        await AcademicYear.update({
+          active: false,
+        })
+      }
       const data = await AcademicYear.create(req.body)
       res.status(201).json(data)
     } catch (error) {
@@ -34,6 +39,11 @@ class AcademicYearController {
   async update(req, res) {
     const { id } = req.params
     try {
+      if (req.body.active === true) {
+        await AcademicYear.update({
+          active: false,
+        })
+      }
       const [updatedRowsCount, updatedRows] = await AcademicYear.update(
         req.body,
         {

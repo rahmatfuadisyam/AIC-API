@@ -1,4 +1,4 @@
-const { EmployeePresence } = require('@models')
+const { EmployeePresence, Unit, AcademicYear, Employee } = require('@models')
 
 class EmployeePresenceController {
   async create(req, res) {
@@ -16,7 +16,30 @@ class EmployeePresenceController {
     try {
       let data = null
       if (id === undefined) {
-        data = await EmployeePresence.findAll({ order: [['createdAt', 'ASC']] })
+        data = await EmployeePresence.findAll({
+          include: [
+            {
+              model: Unit,
+              as: 'unit',
+              attributes: ['name'],
+            },
+            {
+              model: AcademicYear,
+              as: 'academicYear',
+              attributes: ['name'],
+            },
+            {
+              model: Employee,
+              as: 'employee',
+              attributes: ['nip', 'name'],
+            },
+          ],
+          where: {
+            idUnit: req.query.idUnit,
+            idAcademicYear: req.query.idAcademicYear,
+          },
+          order: [[{ model: Employee, as: 'employee' }, 'nip', 'ASC']],
+        })
       } else {
         data = await EmployeePresence.findByPk(id)
       }
