@@ -16,7 +16,47 @@ class StudentGradeController {
     try {
       let data = null
       if (id === undefined) {
-        data = await StudentGrade.findAll({ order: [['createdAt', 'ASC']] })
+        data = await StudentGrade.findAll({
+          include: [
+            {
+              model: Unit,
+              as: 'unit',
+              attributes: ['name'],
+            },
+            {
+              model: AcademicYear,
+              as: 'academicYear',
+              attributes: ['name'],
+            },
+            {
+              model: Classroom,
+              as: 'classroom',
+              attributes: ['name'],
+            },
+            {
+              model: LessonSchedule,
+              as: 'lessonSchedule',
+              attributes: ['name'],
+            },
+            {
+              model: Employee,
+              as: 'employee',
+              attributes: ['name'],
+            },
+            {
+              model: Student,
+              as: 'student',
+              attributes: ['nipd', 'nisn', 'name'],
+            },
+          ],
+          where: {
+            idUnit: req.query.idUnit,
+            idAcademicYear: req.query.idAcademicYear,
+            idClassroom: req.query.idClassroom,
+            idLessonSchedule: req.query.idLessonSchedule,
+          },
+          order: [[{ model: Student, as: 'student' }, 'nipd', 'ASC']],
+        })
       } else {
         data = await StudentGrade.findByPk(id)
       }

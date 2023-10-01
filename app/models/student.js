@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       idUnit: DataTypes.UUID,
       idClassroom: DataTypes.UUID,
       idDepartment: DataTypes.UUID,
-      nipd: DataTypes.STRING,
+      nipd: { type: DataTypes.STRING, unique: true },
       nisn: { type: DataTypes.STRING, unique: true },
       name: DataTypes.STRING,
       generation: DataTypes.INTEGER,

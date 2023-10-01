@@ -3,6 +3,11 @@ const { Curriculum } = require('@models')
 class CurriculumController {
   async create(req, res) {
     try {
+      if (req.body.active === true) {
+        await Curriculum.update({
+          active: false,
+        })
+      }
       const data = await Curriculum.create(req.body)
       res.status(201).json(data)
     } catch (error) {
@@ -34,6 +39,11 @@ class CurriculumController {
   async update(req, res) {
     const { id } = req.params
     try {
+      if (req.body.active === true) {
+        await Curriculum.update({
+          active: false,
+        })
+      }
       const [updatedRowsCount, updatedRows] = await Curriculum.update(
         req.body,
         {
